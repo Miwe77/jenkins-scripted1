@@ -2,8 +2,7 @@ node('dev')
 {
     stage('Compile') {
         echo 'Compiling the Java Maven project...'
-        // Clonamos el código fuente desde el repositorio
-        git 'https://your-repo-url.git'
+       
         
         // Ejecutamos el comando Maven para compilar
         sh 'mvn clean compile'
