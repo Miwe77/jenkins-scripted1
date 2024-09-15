@@ -1,4 +1,4 @@
-node('build') 
+node('dev') 
 {
     stage('Compile') {
         echo 'Compiling the Java Maven project...'
@@ -22,7 +22,7 @@ node('build')
     }
 }
 
-node('production') {
+node('prod') {
     stage('Deploy') {
         echo 'Deploying the application to production...'
         // Copiamos el artefacto al directorio /home/jenkins/app en el nodo de producción
