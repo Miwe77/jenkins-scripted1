@@ -6,31 +6,32 @@ node('dev')
 
     stage('Compile') {
         echo 'Compiling the Java Maven project...'        
-        // Ejecutamos el comando Maven para compilar
+        // We run the Maven command to compile
         sh 'mvn clean compile'
     }
 
     stage('Test') {
         echo 'Running tests on the Java Maven project...'
-        // Ejecutamos las pruebas unitarias del proyecto
+        // We run the project's unit tests
         sh 'mvn test'
     }
 
     stage('Execute Program') {
         echo 'Executing the Java program that processes VISA card numbers...'
-        // Ejecutamos el programa Java que divide los números de la tarjeta VISA
+        // We run the Java program that divides the VISA card numbers
         sh 'mvn exec:java -Dexec.mainClass="com.example.CardProcessor" -Dexec.args="4111111111111111"'
-        //Guardamos el target generado para usarlo en un nodo posterior
+        //We save the generated target to use it in a later node
         stash includes: 'target*/**', name: 't1'
     }
 }
 
 node('prod') {
     stage('Deploy') {
-        //Desempaquetamos el target en el nuevo nodo
+        //We unpack the target on the new node
         unstash 't1'
         echo 'Deploying the application to production...'
-        // Copiamos el artefacto al directorio /home/jenkins/app en el nodo de producción
+        // We copy the artifact to the /home/jenkins/app directory on the production node
+        sh 'mkdir /home/jenkins/jenkins-app/'
         sh 'cp -r target/* /home/jenkins/jenkins-app/'
         echo 'Deployment completed!'
     }
