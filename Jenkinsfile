@@ -1,9 +1,7 @@
 node('dev') 
 {
     stage('Compile') {
-        echo 'Compiling the Java Maven project...'
-       
-        
+        echo 'Compiling the Java Maven project...'        
         // Ejecutamos el comando Maven para compilar
         sh 'mvn clean compile'
     }
