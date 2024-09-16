@@ -12,7 +12,7 @@ node('dev')
    }
    stage('Execute program'){
     echo 'Executing then Java program'
-    sh 'mvn exec:java -Dexec.mainClass="com.example.CardProcessor" -Dexec.args="4111111111111111"'
+    sh 'mvn exec:java -Dexec.mainClass="com.apasoft.CardProcessor" -Dexec.args="4111111111111111"'
     stash includes: 'target/**', name: 'target-jar1'
    }
 }
