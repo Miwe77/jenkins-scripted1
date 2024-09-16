@@ -13,14 +13,14 @@ node('dev')
    stage('Execute program'){
     echo 'Executing then Java program'
     sh 'mvn exec:java -Dexec.mainClass="com.example.CardProcessor" -Dexec.args="4111111111111111"'
-    stash includes: 'target*/**', name: 'target-jar'
+    stash includes: 'target/**', name: 'target-jar1'
    }
 }
 node('prod'){
     stage('Deploy') {
         //We unpack the target on the new node
-        unstash 'target-jar'
-        echo 'Deploying the application to production...'
+        unstash 'target-jar1'
+        echo 'Deploying the application to production........'
         // We copy the artifact to the /home/jenkins/app directory on the production node
         sh 'rm -rf  /home/jenkins/jenkins-app/'
         sh 'mkdir /home/jenkins/jenkins-app/'
