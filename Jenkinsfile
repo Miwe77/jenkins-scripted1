@@ -1,5 +1,9 @@
 node('dev') 
 {
+    stage('Get repository'){
+        git branch: 'main', url: 'https://github.com/ApasoftTraining/jenkins-scripted1.git'
+    }
+    
     stage('Compile') {
         echo 'Compiling the Java Maven project...'        
         // Ejecutamos el comando Maven para compilar
