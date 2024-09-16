@@ -31,7 +31,7 @@ node('prod') {
         unstash 't1'
         echo 'Deploying the application to production...'
         // We copy the artifact to the /home/jenkins/app directory on the production node
-        sh 'rm -f  /home/jenkins/jenkins-app/'
+        sh 'rm -rf  /home/jenkins/jenkins-app/'
         sh 'mkdir /home/jenkins/jenkins-app/'
         sh 'cp -r target/* /home/jenkins/jenkins-app/'
         echo 'Deployment completed!'
