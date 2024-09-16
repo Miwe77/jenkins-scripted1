@@ -20,16 +20,18 @@ node('dev')
         echo 'Executing the Java program that processes VISA card numbers...'
         // Ejecutamos el programa Java que divide los números de la tarjeta VISA
         sh 'mvn exec:java -Dexec.mainClass="com.example.CardProcessor" -Dexec.args="4111111111111111"'
+        //Guardamos el target generado para usarlo en un nodo posterior
         stash includes: 'target*/**', name: 't1'
     }
 }
 
 node('prod') {
     stage('Deploy') {
+        //Desempaquetamos el target en el nuevo nodo
         unstash 't1'
         echo 'Deploying the application to production...'
         // Copiamos el artefacto al directorio /home/jenkins/app en el nodo de producción
-        sh 'cp -r target/* /home/jenkins/app/'
+        sh 'cp -r target/* /home/jenkins/jenkins-app/'
         echo 'Deployment completed!'
     }
 }
