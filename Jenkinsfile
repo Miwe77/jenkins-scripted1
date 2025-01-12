@@ -1,6 +1,8 @@
-properties([parameters([string(defaultValue: '4111111111111111', name: 'cardNumber')]), pipelineTriggers([])])
 node('dev')
 {
+   def cardNumber=input message: 'Introduzca el numero de la tarjeta:', 
+                           parameters: [string(defaultValue: '4111111111111111', 
+                           name: 'cardNumber')]
    stage('Get GIT repository')
    {
     git branch: 'main', url: 'https://github.com/Miwe77/jenkins-scripted1.git'
