@@ -1,3 +1,4 @@
+properties([parameters([string(defaultValue: '4111111111111111', name: 'cardNumber')]), pipelineTriggers([])])
 node('dev')
 {
    stage('Get GIT repository')
@@ -12,7 +13,7 @@ node('dev')
    }
    stage('Execute program'){
     echo 'Executing then Java program'
-    sh 'mvn exec:java -Dexec.mainClass="com.apasoft.CardProcessor" -Dexec.args="4111111111111111"'
+    sh "mvn exec:java -Dexec.mainClass="com.apasoft.CardProcessor" -Dexec.args='${cardNumber}'"
     stash includes: 'target/**', name: 'target-jar1'
    }
 }
